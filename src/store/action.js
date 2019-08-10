@@ -1,3 +1,4 @@
+import {getHot,getLangs,getResult} from '../api/index'
 export const CHNAGE_SEARCH_VAL='change_search_val';
 export const CHANGE_RESULT_VAL='change_result_val';
 export const SET_HOT_LIST='set_hot_list';
@@ -18,11 +19,23 @@ export const changeResultAction=(result)=>{
             result:result
         }    
 }
-export const setHotList=(hotList)=>{
+/* export const setHotList=(hotList)=>{
     return {
         type:SET_HOT_LIST,
         hotList:hotList
     }   
+} */
+export const setHotList=()=>{
+    return dispath=>{
+            getHot().then(res=>{
+                let hotList=res.data.data;
+                let action={
+                    type:SET_HOT_LIST,
+                    hotList:hotList
+                }
+                dispath(action);
+            }) 
+    }
 }
 export const setTagList=(tagList)=>{
     return {
@@ -30,6 +43,17 @@ export const setTagList=(tagList)=>{
         tagList:tagList
     }   
 }
+/* export const setTagList=(dispath=>{
+    return dispath=>{
+        getLangs().then(res=>{
+            let action ={
+                type:SET_TAG_LIST,
+                tagList:res.data.data
+            }
+            dispath(action);
+        })
+    }
+}) */
 export const setResult=(result)=>{
     return {
         type:SET_RESULT,
