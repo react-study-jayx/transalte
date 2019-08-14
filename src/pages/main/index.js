@@ -8,7 +8,6 @@ class Main extends Component{
     constructor(props){
         super(props);
     }
-
     componentWillMount(){
         getLangs().then(res=>{
             let tagList=res.data.data;
